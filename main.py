@@ -16,7 +16,7 @@ class MainWindow(Screen):
 class SecondWindow(Screen):
     pass
 
-class ThirdWindow(Screen):
+class RegisterWindow(Screen):
     pass
 
 class WindowManager(ScreenManager):

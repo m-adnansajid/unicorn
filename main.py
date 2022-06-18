@@ -1,4 +1,4 @@
-from kivy.app import App
+from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 
@@ -19,12 +19,17 @@ class SecondWindow(Screen):
 class RegisterWindow(Screen):
     pass
 
+class ContactMgmt(Screen):
+    pass
+
 class WindowManager(ScreenManager):
     pass
 
+
+
 kv = Builder.load_file("my.kv")
 
-class MyMainApp(App):
+class MyMainApp(MDApp):
     def build(self):
         return kv
 

@@ -2,6 +2,7 @@ WindowManager:
     MainWindow:
     SecondWindow:
     RegisterWindow:
+    ContactMgmt:
 
 <MainWindow>:
     name: "main"
@@ -46,7 +47,7 @@ WindowManager:
             size_hint: (.2, None)
             height: 50
         GridLayout:
-            rows: 5
+            rows: 6
             cols: 2
             padding: 10
             spacing: 10
@@ -98,4 +99,56 @@ WindowManager:
                 height: 30
                 id: private
 
+            Button:
+                size_hint: (.2, None)
+                halign: 'center'
+                height: 30
+                text: "Add contact"
+                on_release:
+                    app.root.current = "formExample"
+                    root.manager.transition.direction = "right"
 
+<BorderedLabel@Label>:
+    font_size: 20
+    background_color: 1, 1, 1, 1
+    background_normal: ""
+    canvas.before:
+        Color:
+            rgba: 0, 1, 0, 0.5
+        Line:    # --- adds a border --- #
+            width: 2
+            rectangle: self.x, self.y, self.width, self.height
+
+<RoundedBtn@Button>:
+    font_size: 20
+    background_color: 0, 0, 0, 0
+    background_normal: ""
+    canvas.before:
+        Color:
+            rgba: 0, 1, 0, 0.5
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [55]  #---- This rounds the corners --- #
+
+<ContactMgmt>:
+    name: "contactMgmt"
+    GridLayout:
+        padding: 15, 15
+        cols: 1
+        RoundedBtn:
+            text: "This is the rbutton"
+            size_hint: 0.3, 0.3
+            color: 0, 0, 0, 1
+        BorderedLabel:
+            text: "This is the label"
+            size_hint: 0.2, 0.2
+        Button:
+            text: "This is the default button"
+            size_hint: 0.2, 0.2
+        Label:
+            text: "This is the default label"
+            size_hint: 0.3, 0.3
+
+<FormExample>:
+    name: "formExample"

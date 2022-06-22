@@ -9,8 +9,8 @@
 #### Schritte zum Ausführen der Anwendung:
 
 1) "main.py" ausführen.
-2) Teilweise sind Button noch ohne Funktionalität,
-diese Folgt im nächsten Assignment.
+2) Teilweise sind Buttons noch ohne Funktionalität,
+diese Folgt mit dem nächsten Assignment.
 
 
 ####Weitere Hinweise:

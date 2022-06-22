@@ -13,7 +13,7 @@
 diese Folgt mit dem nächsten Assignment.
 
 
-####Weitere Hinweise:
+#### Weitere Hinweise:
 - Anwendung wurde auf Windows 10 getestet.
 - Python Version 3.9.4
 

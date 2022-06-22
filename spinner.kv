@@ -1,0 +1,13 @@
+<MyLayout>
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+        Label:
+            id: click_label
+            text: "Choose status"
+            font_size: 32
+        Spinner:
+            id: spinner_id
+            text: "Current Status"
+            values: ["Available", "Offline", "In Meeting"]
+            on_text: root.spinner_clicked(spinner_id.text)

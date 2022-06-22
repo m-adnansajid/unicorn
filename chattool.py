@@ -250,7 +250,7 @@ class ContentNavigationDrawer(MDBoxLayout):
     screen_manager = ObjectProperty()
     nav_drawer = ObjectProperty()
 
-Window.size = (600, 600)
+Window.size = (350, 550)
 
 class TestNavigationDrawer(MDApp):
     # dialog = None

@@ -1,111 +1,279 @@
-from kivymd.app import MDApp
+from kivy.core.window import Window
 from kivy.lang import Builder
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.properties import ObjectProperty, StringProperty
+from kivy.uix.button import Button
+from kivy.uix.dropdown import DropDown
+from kivy.uix.widget import Widget
 
-# Video about navigation between screens
-#https://www.youtube.com/watch?v=xaYn4XdieCs
+from kivymd.app import MDApp
+from kivymd.icon_definitions import md_icons
+from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.button import MDFlatButton
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.list import OneLineAvatarIconListItem, TwoLineIconListItem
+from kivymd.uix.textfield import MDTextField
 
-# Video about popups
-# https://www.youtube.com/watch?v=PpLuyOzCKTQ
+KV = '''
+<ContentNavigationDrawer>:
 
-# Home -> letzen Kontakte?
-class MainWindow(Screen):
-    pass
+    ScrollView:
 
-# Status anpassen
-class SecondWindow(Screen):
-    pass
+        MDList:
 
-class RegisterWindow(Screen):
-    pass
+            OneLineListItem:
+                text: "Chats"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "chats"
 
-class ContactMgmt(Screen):
-    pass
+            OneLineListItem:
+                text: "Status"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "status"
 
-class WindowManager(ScreenManager):
-    pass
+            OneLineListItem:
+                text: "Contacts"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "contacts"
+
+            OneLineListItem:
+                text: "Add Contact"
+                on_press:
+                    root.nav_drawer.set_state("close")
+                    root.screen_manager.current = "addcontact"
 
 
+MDScreen:
 
-kv = Builder.load_file("my.kv")
+    MDToolbar:
+        id: toolbar
+        pos_hint: {"top": 1}
+        elevation: 10
+        title: "UniCornChatTool"
+        left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
 
-class MyMainApp(MDApp):
+    MDNavigationLayout:
+        x: toolbar.height
+
+        ScreenManager:
+            id: screen_manager
+
+            MDScreen:
+                name: "chats"
+                MDGridLayout:
+                    x: toolbar.height
+                    size_hint_y: 1.0 - toolbar.height/root.height
+                    cols: 2
+                    row_force_default:True 
+                    row_default_height: 40 
+                    MDLabel:
+                        text: "ProfilImg"
+                    MDLabel:
+                        text: "Own name" 
+                    MDLabel:
+                        text: "" #Platzhalter
+                    Spinner:
+                        id: spinner_id
+                        text: "State"
+                        values: ["Available", "Offline", "In Meeting"]
+                        width: 3
+                        on_text: root.spinner_clicked(spinner_id.text)
+                    
+                    Widget:
+                        id: separator
+                        size_hint_y: None
+                        height: 6
+                        canvas:
+                            Color:
+                                rgb: 0.33, 0.33, 0.33
+                            Rectangle:
+                                pos: 0, separator.center_y - 0.1
+                                size: 600, 2
+                ScrollView:
+                    x: 0
+                    size_hint_y: 1.0 - 2.7*(toolbar.height/root.height)
+                    MDList:
+                        id: scroll
+                        TwoLineIconListItem:
+                            text: "Contact 1"
+                            secondary_text: "Last message here"
+
+                            IconLeftWidget:
+                                icon: "language-python" 
+
+                        TwoLineIconListItem:
+                            text: "Contact 2"
+                            secondary_text: "Last message here"
+
+                            IconLeftWidget:
+                                icon: "language-python" 
+
+                        TwoLineIconListItem:
+                            text: "Contact 3"
+                            secondary_text: "Last message here"
+
+                            IconLeftWidget:
+                                icon: "language-python"
+
+                        TwoLineIconListItem:
+                            text: "Contact 1"
+                            secondary_text: "Last message here"
+
+                            IconLeftWidget:
+                                icon: "language-python" 
+
+                        TwoLineIconListItem:
+                            text: "Contact 2"
+                            secondary_text: "Last message here"
+
+                            IconLeftWidget:
+                                icon: "language-python" 
+
+                        TwoLineIconListItem:
+                            text: "Contact 3"
+                            secondary_text: "Last message here"
+
+                            IconLeftWidget:
+                                icon: "language-python"       
+
+                MDFloatingActionButton:
+                    elevation: 8
+                    icon: 'message'
+                    pos_hint: {"center_x": 0.9, "center_y": .1}
+                    on_press:
+                        root.manager.transition.direction = 'left'
+
+            MDScreen:
+                name: "status"
+
+                MDLabel:
+                    text: "Current status"
+                    halign: "center"
+
+            MDScreen:
+                name: "contacts"
+            # TODO zeigen auf welcher Seite man ist?    
+                ScrollView:
+                    x: 0
+                    size_hint_y: 1.0 - toolbar.height/root.height
+                    MDList:
+                        id: scroll
+                        TwoLineIconListItem:
+                            text: "Contact 1"
+                            secondary_text: "Last message here"
+
+                            IconLeftWidget:
+                                icon: "language-python" 
+
+                        TwoLineIconListItem:
+                            text: "Contact 2"
+                            secondary_text: "Last message here"
+
+                            IconLeftWidget:
+                                icon: "language-python" 
+
+                        TwoLineIconListItem:
+                            text: "Contact 3"
+                            secondary_text: "Last message here"
+
+                            IconLeftWidget:
+                                icon: "language-python"
+
+                        TwoLineIconListItem:
+                            text: "Contact 1"
+                            secondary_text: "Last message here"
+
+                            IconLeftWidget:
+                                icon: "language-python" 
+
+                        TwoLineIconListItem:
+                            text: "Contact 2"
+                            secondary_text: "Last message here"
+
+                            IconLeftWidget:
+                                icon: "language-python" 
+
+                        TwoLineIconListItem:
+                            text: "Contact 3"
+                            secondary_text: "Last message here"
+
+                            IconLeftWidget:
+                                icon: "language-python"
+
+                MDFloatingActionButton:
+                    elevation: 8
+                    icon: 'account-plus'
+                    pos_hint: {"center_x": 0.4, "center_y": .5}
+                    on_press:
+                        app.root.current = 'message'
+                        root.screen_manager.current = "addcontacts"
+
+        # TODO navigation to register Contact         
+            MDScreen:
+                name: "addcontact"
+
+                MDBoxLayout:
+                    orientation: 'vertical'
+
+                    MDTextField:
+                        hint_text: "Enter name"
+                        icon_right: "text"
+                        icon_right_color: app.theme_cls.primary_color
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+                        size_hint_x:None
+                        width: 500
+
+                    MDTextField:
+                        hint_text: "Enter surname"
+                        icon_right: "text"
+                        icon_right_color: app.theme_cls.primary_color
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+                        size_hint_x:None
+                        width:500
+
+                    MDTextField:
+                        hint_text: "Enter number"
+                        icon_right: "cellphone"
+                        icon_right_color: app.theme_cls.primary_color
+                        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                        size_hint_x:None
+                        width:500
+
+
+        MDNavigationDrawer:
+            id: nav_drawer
+
+            ContentNavigationDrawer:
+                screen_manager: screen_manager
+                nav_drawer: nav_drawer
+'''
+
+class MyLayout(Widget):
+    def spinner_clicked(self, value):
+        self.ids.click_label.text = f'Current State {value}'
+
+class ListItem(TwoLineIconListItem):
+    icon = StringProperty("android")
+
+
+class ContentNavigationDrawer(MDBoxLayout):
+    screen_manager = ObjectProperty()
+    nav_drawer = ObjectProperty()
+
+
+Window.size = (350, 550)
+
+
+class TestNavigationDrawer(MDApp):
+    # dialog = None
+
     def build(self):
-        return kv
-
-if __name__ == "__main__":
-    MyMainApp().run()
+        return Builder.load_string(KV)
 
 
+TestNavigationDrawer().run()
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# from kivy.app import App
-# from kivy.uix.label import Label
-# from kivy.uix.button import Button
-#
-# from kivy.app import App
-#
-# from kivy.uix.boxlayout import BoxLayout
-#
-# from kivy.lang import Builder
-#
-# Builder.load_string("""
-#
-# <KivyButton>:
-#
-#     Button:
-#
-#         text: "Hello Button!"
-#
-#         size_hint: .12, .12
-#
-#         Image:
-#
-#             source: 'images.jpg'
-#
-#             center_x: self.parent.center_x
-#
-#             center_y: self.parent.center_y
-#
-# """)
-#
-#
-# class KivyButton(App, BoxLayout):
-#
-#     def build(self):
-#         return self
-#
-#
-# KivyButton().run()
-# # class FirstKivy(App):
-# #     def build(self):
-# #         return Button(text="Welcome to UniCornChat!", pos=(300, 350), size_hint=(.25, .18))
-# #         # return Label(text="Hello Kivy!")
-# #
-# #
-# # FirstKivy().run()
-
+# TODO folgende Struktur fuer die Screens
+# https://kivy.org/doc/stable/api-kivy.uix.screenmanager.html

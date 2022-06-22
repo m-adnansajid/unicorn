@@ -117,7 +117,7 @@ class ChatBot(MDApp):
         screen_manager = ScreenManager()
         #screen_manager.add_widget(main)
         #screen_manager.add_widget(Builder.load_file("Main.kv"))
-        screen_manager.add_widget(Builder.load_file("Chats.kv"))
+        screen_manager.add_widget(Builder.load_file("Application/Chats.kv"))
         return screen_manager
 
     def bot_name(self):

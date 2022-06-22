@@ -2,7 +2,7 @@
 
 ### Hinweise zum Starten der Anwendung:
 
-####Folgende Pakete installieren:
+#### Folgende Pakete installieren:
 * kivy
 * kivymd
 
